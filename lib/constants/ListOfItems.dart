@@ -205,7 +205,7 @@ List<ProductItems> productList = <ProductItems>[
   ProductItems(
       quantity: 4,
       id: 13,
-      image: "assets/images/006.jpeg",
+      image: "assets/images/perf.jpeg",
       name:
           "Travelling luggage made with good fibre wood for both male and female",
       numberOfBuyers: "1009",
@@ -298,7 +298,7 @@ List<ProductItems> productList = <ProductItems>[
   ProductItems(
       quantity: 4,
       id: 22,
-      image: "assets/images/004.jpeg",
+      image: "assets/images/baby.jpeg",
       name: "Unisex Sneakers for both indoor and outdoor use",
       numberOfBuyers: "44409",
       date: "Month",

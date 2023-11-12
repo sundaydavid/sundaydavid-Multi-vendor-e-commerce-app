@@ -4,19 +4,55 @@ import 'package:foodie/constants/ListOfItems.dart';
 import 'package:foodie/constants/widget.dart';
 
 class ProductViewAndRelated extends StatefulWidget {
-  ProductViewAndRelated({super.key, this.items});
+  const ProductViewAndRelated({super.key, this.items});
 
-  ProductItems? items;
+  final ProductItems? items;
 
   @override
   State<ProductViewAndRelated> createState() => _ProductViewAndRelatedState();
 }
 
 class _ProductViewAndRelatedState extends State<ProductViewAndRelated> {
+  ScrollController scrollController = ScrollController();
+  bool showBtn = false;
+
+  @override
+  void initState() {
+    scrollController.addListener(() {
+      double showOffset = 10.0;
+
+      if (scrollController.offset > showOffset) {
+        showBtn = true;
+        setState(() {});
+      } else {
+        showBtn = false;
+        setState(() {});
+      }
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         extendBodyBehindAppBar: true,
+        floatingActionButton: AnimatedOpacity(
+          opacity: showBtn ? 1.0 : 0.0,
+          duration: const Duration(milliseconds: 500),
+          child: FloatingActionButton(
+            backgroundColor: redColor,
+            onPressed: () {
+              scrollController.animateTo(0,
+                  duration: const Duration(milliseconds: 1000),
+                  curve: Curves.fastOutSlowIn);
+            },
+            child: const Icon(
+              Icons.arrow_upward,
+              size: 32,
+              color: whiteColor,
+            ),
+          ),
+        ),
         appBar: AppBar(
           elevation: 0.0,
           scrolledUnderElevation: 0.0,
@@ -33,6 +69,7 @@ class _ProductViewAndRelatedState extends State<ProductViewAndRelated> {
         body: Padding(
           padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
           child: CustomScrollView(
+            controller: scrollController,
             slivers: [
               SliverList(
                   delegate: SliverChildListDelegate(
@@ -41,7 +78,7 @@ class _ProductViewAndRelatedState extends State<ProductViewAndRelated> {
                   itemCount: productList.length,
                   itemBuilder: (context, index) {
                     return productMainCard(context, items: productList[index]);
-                  })
+                  }),
             ],
           ),
         ));

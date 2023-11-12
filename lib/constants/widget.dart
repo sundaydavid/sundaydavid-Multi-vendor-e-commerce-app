@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:foodie/constants/ListOfItems.dart';
+import 'package:foodie/screens/pages/ProductDetailsPage.dart';
 
 import 'Colors.dart';
 
@@ -55,7 +56,10 @@ Widget productCarousel(BuildContext context) {
 
 Widget productMainCard(BuildContext context, {ProductItems? items}) {
   return InkWell(
-    onTap: () {},
+    onTap: () {
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => ProductDetailsPage(items:items)));
+    },
     child: Container(
       padding: EdgeInsets.all(5),
       margin: EdgeInsets.only(bottom: 25),
@@ -154,7 +158,10 @@ Widget productMainCard(BuildContext context, {ProductItems? items}) {
                   onPressed: () {},
                   child: Text(
                     "Chat Now",
-                    style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: Theme.of(context).secondaryHeaderColor),
+                    style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600,
+                        color: Theme.of(context).secondaryHeaderColor),
                   )),
               ElevatedButton(
                   onPressed: () {},

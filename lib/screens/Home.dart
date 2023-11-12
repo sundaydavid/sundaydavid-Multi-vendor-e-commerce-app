@@ -18,9 +18,45 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  ScrollController scrollController = ScrollController();
+  bool showBtn = false;
+
+  @override
+  void initState() {
+    scrollController.addListener(() {
+      double showOffset = 10.0;
+
+      if (scrollController.offset > showOffset) {
+        showBtn = true;
+        setState(() {});
+      } else {
+        showBtn = false;
+        setState(() {});
+      }
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        floatingActionButton: AnimatedOpacity(
+          opacity: showBtn ? 1.0 : 0.0,
+          duration: const Duration(milliseconds: 1000),
+          child: FloatingActionButton(
+            backgroundColor: redColor,
+            onPressed: () {
+              scrollController.animateTo(0,
+                  duration: const Duration(milliseconds: 1500),
+                  curve: Curves.fastOutSlowIn);
+            },
+            child: const Icon(
+              Icons.arrow_upward,
+              size: 32,
+              color: whiteColor,
+            ),
+          ),
+        ),
         appBar: AppBar(
           title: gradientText(text: appName),
           elevation: 0.5,
@@ -36,6 +72,7 @@ class _HomeState extends State<Home> {
         body: Padding(
           padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
           child: CustomScrollView(
+            controller: scrollController,
             slivers: [
               SliverList(
                   delegate: SliverChildListDelegate([

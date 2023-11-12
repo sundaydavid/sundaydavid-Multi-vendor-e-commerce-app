@@ -3,7 +3,7 @@ import 'package:foodie/constants/Colors.dart';
 import 'package:foodie/constants/ListOfItems.dart';
 import 'package:foodie/screens/pages/ProductViewAndRelated.dart';
 
-Widget normalProductCard(BuildContext context, {ProductItems? items}) {
+Widget normalProductCard(BuildContext context, {ProductItems? items,}) {
   return InkWell(
     onTap: () {
       Navigator.push(
